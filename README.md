@@ -1,4 +1,7 @@
 # Java Apps
+
+The images built by this repository rely on [Eclipse Adoptium Temurin OpenJDK](https://adoptium.net/), which is [the rebranded Adopt OpenJDK](https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/) since July 2021.
+
 ## Just another repository with Docker image definitions
 
 This repository is meant to host Java-Applications – separated by branches:
