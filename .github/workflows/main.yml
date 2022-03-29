@@ -140,7 +140,7 @@ jobs:
         run: |
           triggerDefinitionFile="workflow/trigger.json"
           curlPrefix='curl --request POST -u "${{ secrets.PAT_USERNAME }}:${{ secrets.PAT_TOKEN }}" '
-          runCommands=$( cat "./base_image/${triggerDefinitionFile}" | jq -c --arg prefix "${curlPrefix}" '.[] as $c | { "cmd": ( $prefix + $c[ "url" ] + " --data ''" + ( $c[ "data" ] | tostring ) + "''" ), "comment": $c[ "comment" ] }' )
+          runCommands=$( cat "./base_image/${triggerDefinitionFile}" | jq -c --arg sq "'" --arg prefix "${curlPrefix}" '.[] as $c | { "cmd": ( $prefix + $c[ "url" ] + " --data " + $sq + ( $c[ "data" ] | tostring ) + $sq ), "comment": $c[ "comment" ] }' )
           IFS=$'\n'
           for trigger in $( echo "${runCommands}" ); do
             echo $( echo "${trigger}" | jq -r '.comment as $c | "\\033[1;30;42m " + $c + " \\033[0m"' )
