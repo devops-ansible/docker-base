@@ -1,6 +1,6 @@
-# Java Apps
+# BaseImages – with and without pre-installed OpenJDK
 
-The images built by this repository rely on [Eclipse Adoptium Temurin OpenJDK](https://adoptium.net/), which is [the rebranded Adopt OpenJDK](https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/) since July 2021.
+The JDK-including images built by this repository rely on [Eclipse Adoptium Temurin OpenJDK](https://adoptium.net/), which is [the rebranded Adopt OpenJDK](https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/) since July 2021.
 
 ## Just another repository with Docker image definitions
 
@@ -19,7 +19,8 @@ The first level of keys is meant to define the branches reflected. If the `maste
     "master": {
         "jdk8": "YYYY-MM-DD HH:ii:ss",
         "jdk11": "YYYY-MM-DD HH:ii:ss",
-        "jdk17": "YYYY-MM-DD HH:ii:ss"
+        "jdk17": "YYYY-MM-DD HH:ii:ss",
+        "latest": "YYYY-MM-DD HH:ii:ss"
     },
     "application": {
         "tag": "YYYY-MM-DD HH:ii:ss"

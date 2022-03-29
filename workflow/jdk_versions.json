@@ -1,5 +1,6 @@
 {
     "jdk8": "temurin-8-jdk",
     "jdk11": "temurin-11-jdk",
-    "jdk17": "temurin-17-jdk"
+    "jdk17": "temurin-17-jdk",
+    "latest": ""
 }

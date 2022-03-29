@@ -32,36 +32,45 @@ apt-get -yq autoremove
 echo -e '\033[1;30;42m install basic tools \033[0m'
 apt-get install -yq \
         python3-setuptools python3-pip python3-pkg-resources \
-        python3-jinja2 python3-yaml \
+        python3-jinja2 python3-yaml python3-httplib2 python3-paramiko \
         vim nano jq \
         htop tree tmux screen sudo git zsh ssh screen \
         supervisor expect \
         gnupg openssl \
         curl wget \
-        unzip \
+        unzip zip \
         locales locales-all \
         cron \
         libfreetype6-dev \
-        dialog
+        dialog \
+        xmlstarlet gettext autoconf
 
 pip install j2cli
 
+if [ -z "${JDK_NAME}" ]; then
 
-echo
-echo -e '\033[1;30;42m installing Eclipse Adoptium JDK \033[0m'
+    echo
+    echo -e '\033[1;30;43m skipping JDK installation since JDK_NAME is empty \033[0m'
 
-# remove existing installations
-apt-get remove --auto-remove -qy \
-        openjdk*
+else
 
-# add GPG Key for Eclipse Adoptium
-keyringPath="/usr/share/keyrings/adoptium.asc"
-wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee ${keyringPath}
-echo "deb [signed-by=${keyringPath}] https://packages.adoptium.net/artifactory/deb $( awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release ) main" | tee /etc/apt/sources.list.d/adoptium.list
+    echo
+    echo -e '\033[1;30;42m installing Eclipse Adoptium JDK \033[0m'
 
-# update and install
-apt-get -yq update
-apt-get -yq install "${JDK_NAME}"
+    # remove existing installations
+    apt-get remove --auto-remove -qy \
+            openjdk*
+
+    # add GPG Key for Eclipse Adoptium
+    keyringPath="/usr/share/keyrings/adoptium.asc"
+    wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee ${keyringPath}
+    echo "deb [signed-by=${keyringPath}] https://packages.adoptium.net/artifactory/deb $( awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release ) main" | tee /etc/apt/sources.list.d/adoptium.list
+
+    # update and install
+    apt-get -yq update
+    apt-get -yq install "${JDK_NAME}"
+
+fi
 
 
 echo

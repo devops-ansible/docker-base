@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-master_image_name="devopsansiblede/java-base"
+master_image_name="devopsansiblede/baseimage"
 
 # store current working directory
 workingDir=$( pwd )
