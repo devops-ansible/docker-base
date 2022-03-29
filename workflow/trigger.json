@@ -1,0 +1,16 @@
+[
+    {
+        "comment": "Build OpenLDAP Docker image 'devopsansiblede/ldap'",
+        "url":     "https://api.github.com/repos/devops-ansible/docker-ldap/dispatches",
+        "data": {
+            "event_type": "build_application"
+        }
+    },
+    {
+        "comment": "Build worksuite container 'devopsansiblede/worksuite'",
+        "url":     "https://api.github.com/repos/devops-ansible/worksuite/dispatches",
+        "data": {
+            "event_type": "build_application"
+        }
+    }
+]

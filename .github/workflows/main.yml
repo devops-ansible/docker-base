@@ -91,6 +91,7 @@ jobs:
     needs:
       - "prepare_base_image"
       - "build_base_image"
+
     runs-on: "ubuntu-latest"
 
     steps:
@@ -118,5 +119,32 @@ jobs:
           commit_user_name:  "GitHub Actions"
           commit_user_email: "dev@winter-martin.de"
           repository:        "./base_image/"
+
+
+  trigger_other_repositories:
+
+    needs:
+      - "base_image_documentation"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+
+      - name: "Checkout this repository"
+        uses: "actions/checkout@v2"
+        with:
+          ref: "master"
+          path: "base_image"
+
+      - name: "try to trigger other workflows from other repositories"
+        run: |
+          triggerDefinitionFile="workflow/trigger.json"
+          curlPrefix='curl --request POST -u "${{ secrets.PAT_USERNAME }}:${{ secrets.PAT_TOKEN }}" '
+          runCommands=$( cat "./base_image/${triggerDefinitionFile}" | jq -c --arg prefix "${curlPrefix}" '.[] as $c | { "cmd": ( $prefix + $c[ "url" ] + " --data ''" + ( $c[ "data" ] | tostring ) + "''" ), "comment": $c[ "comment" ] }' )
+          IFS=$'\n'
+          for trigger in $( echo "${runCommands}" ); do
+            echo $( echo "${trigger}" | jq -r '.comment as $c | "\\033[1;30;42m " + $c + " \\033[0m"' )
+            bash -c "$( echo "${trigger}" | jq -r '.cmd' )"
+          done
 
 ...
