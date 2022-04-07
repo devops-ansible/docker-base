@@ -12,6 +12,7 @@ ENV TIMEZONE        "Europe/Berlin"
 ENV SET_LOCALE      "de_DE.UTF-8"
 ENV START_CRON      0
 ENV CRON_PATH       "/etc/cron.d/docker"
+ENV EDITOR          "vim"
 
 ARG JDK_NAME="temurin-17-jdk"
 ENV JDK_NAME "${JDK_NAME}"
@@ -23,8 +24,6 @@ COPY files/ /
 RUN chmod a+x /install.sh && \
     /install.sh && \
     rm -f /install.sh
-
-WORKDIR ${APACHE_WORKDIR}
 
 # run on every (re)start of container
 ENTRYPOINT [ "entrypoint" ]

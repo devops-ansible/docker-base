@@ -4,18 +4,23 @@
 ## adjust timezone
 ###
 
-echo "Now working on your timezone and define it to ${TIMEZONE} ..."
+echo -e "\033[0;30;42m Now working on timezone and define it to be \"${TIMEZONE}\" ... \033[0m"
 timezone_file="/usr/share/zoneinfo/${TIMEZONE}"
+localtime_file="/etc/localtime"
 host_timezone="/etc/timezone"
-if [ -e $host_timezone ]; then
-    echo "${TIMEZONE}" > $host_timezone
-    ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+
+if [ -e $timezone_file ]; then
+    if [ -e $host_timezone ]; then
+        echo "${TIMEZONE}" > "${host_timezone}"
+    fi
+    ln -sf "${timezone_file}" "${localtime_file}"
 fi
 
 ###
 ## adjust locale
 ###
 #update-locale "LANG=${SET_LOCALE}"
+echo -e "\033[0;30;42m Adjusting locale and setting it to be \"${SET_LOCALE}\" ... \033[0m"
 export LC_ALL="${SET_LOCALE}"
 export LANG="${SET_LOCALE}"
 export LANGUAGE="${SET_LOCALE}"
@@ -26,7 +31,7 @@ export LANGUAGE="${SET_LOCALE}"
 ###
 
 bootDir="/boot.d/"
-echo "Doing additional bootup things from \`${bootDir}\` ..."
+echo -e "\033[0;30;42m Doing additional bootup things from \`${bootDir}\` ... \033[0m"
 cd "${bootDir}"
 
 # find all (sub(sub(...))directories of the /boot.d/ folder to be
@@ -50,3 +55,5 @@ while IFS= read -r cur; do
         done
     fi
 done <<< "${dirs}"
+
+echo -e "\033[0;30;42m \"boot.sh\" finished - continue with container ENTRYPOINT / CMD. \033[0m"
