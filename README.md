@@ -43,7 +43,8 @@ The `workflow` directory is important on every active branch, since the files th
 | `EDITOR`              | `vim`                 | yes                | Default editor for the container – there are multiple ones installed like `vim` (default) and `nano`. |
 | `TIMEZONE`            | `Europe/Berlin`       | yes                | Timezone used within container – adjust to where you are living |
 | `SET_LOCALE`          | `de_DE.UTF-8`         | yes                | Default locale used for keyboard layout selection, etc – not always relevant within containers, but sometimes very usefull |
-| `START_CRON`          | `0`                   | yes                | Should cron be started within the container? then set it to `1`. |
+| `START_CRON`          | `0`                   | yes                | Should cron be started within the container? Then set it to `1`. |
+| `BOOT_MSG_SHOW`       | `1`                   | yes                | Should messages of `boot.sh` sourced scripts be shown? Then `1` is perfect, otherwise change to `0`. |
 | `CRON_PATH`           | `/etc/cron.d/docker`  | no                 | Where is the cron file located? for information about the cron file, see below. |
 | `CUSTOM_CERTS_PATH`   | `/certs`              | no                 | Location where to find custom certificates which will be imported and trusted – useful to accept custom (selfsigned) RootCAs. |
 | `TERM`                | `xterm`               | no                 | |
